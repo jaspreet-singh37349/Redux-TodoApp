@@ -1,28 +1,19 @@
 import React, {Component} from 'react'
-import API from '../Api/index'
-import {addGoal, removeGoal} from '../actions/goals'
+import {handleAddGoal, handleDeleteGoal} from '../actions/goals'
 import List from './List'
 
 class Goals extends Component {
-    addItem = (e) => {
-      e.preventDefault()
+  addItem = (e) => {
+    e.preventDefault()
+    this.props.store.dispatch(handleAddGoal(
+      this.input.value,
+      () => this.input.value = ''
+    ))
+  }
+  removeItem = (goal) => {
+    this.props.store.dispatch(handleDeleteGoal(goal))
+  }
 
-      return API.saveGoal(this.input.value)
-        .then((goal) => {
-          this.props.store.dispatch(addGoal(goal))
-          this.input.value = ''
-        })
-        .catch(() => alert('There was an error. Try again.'))
-    }
-    removeItem = (goal) => {
-      this.props.store.dispatch(removeGoal(goal.id))
-
-      return API.deleteGoal(goal.id)
-        .catch(() => {
-          this.props.store.dispatch(addGoal(goal))
-          alert('An error occurred. Try again.')
-        })
-    }
     render() {
       return (
         <div>

@@ -7,6 +7,7 @@ import {receiveData} from '../actions/shared'
 
 class App extends Component {
   componentDidMount () {
+    console.log("Using Thunk Middleware")
     const { store } = this.props
 
     Promise.all([
