@@ -1,28 +1,20 @@
 import React, { Component } from 'react'
-import API from '../Api/index'
-import Todos from './todos'
-import Goals from './goals'
-import {receiveData} from '../actions/shared'
-
+import {ConnectedTodos, ConnectedGoals} from '../contextApi/ContextApi'
+import {handleInitialData} from '../actions/shared'
 
 class App extends Component {
   componentDidMount () {
-    console.log("Using Thunk Middleware")
     const { store } = this.props
 
-    Promise.all([
-      API.fetchTodos(),
-      API.fetchGoals()
-    ]).then(([ todos, goals ]) => {
-      store.dispatch(receiveData(todos, goals))
-    })
+    console.log("Using Context Api")
 
+    store.dispatch(handleInitialData())
 
     store.subscribe(() => this.forceUpdate())
   }
   render() {
     const { store } = this.props
-    const { todos, goals, loading } = store.getState()
+    const { loading } = store.getState()
 
     if (loading === true) {
       return <h3>Loading...</h3>
@@ -30,8 +22,8 @@ class App extends Component {
 
     return (
       <div>
-        <Todos todos={todos} store={this.props.store} />
-        <Goals goals={goals} store={this.props.store} />
+        <ConnectedTodos />
+        <ConnectedGoals />
       </div>
     )
   }

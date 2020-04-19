@@ -5,13 +5,13 @@ import List from './List'
 class Goals extends Component {
   addItem = (e) => {
     e.preventDefault()
-    this.props.store.dispatch(handleAddGoal(
+    this.props.dispatch(handleAddGoal(
       this.input.value,
       () => this.input.value = ''
     ))
   }
   removeItem = (goal) => {
-    this.props.store.dispatch(handleDeleteGoal(goal))
+    this.props.dispatch(handleDeleteGoal(goal))
   }
 
     render() {
