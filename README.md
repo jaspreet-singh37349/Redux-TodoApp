@@ -8,4 +8,4 @@ Basic Todo App
 2. cd Redux-TodoApp then run npm install
 3. npm start to start the app then navigate to http://localhost:3000/ on your local machine
 
-## Website Link -> https://react-todo-appp.herokuapp.com/
+## Website Link -> https://jaspreet-singh37349.github.io/Redux-TodoApp
