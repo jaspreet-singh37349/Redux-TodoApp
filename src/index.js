@@ -4,11 +4,12 @@ import './index.css'
 import reducer from './reducers'
 import { createStore } from 'redux'
 import middleware from './middlewares/index'
-import {Provider, ConnectedApp} from './contextApi/ContextApi'
+import {Provider} from './contextApi/ContextApi'
+import App from './components/App'
 
 const store = createStore(reducer, middleware)
 
 ReactDOM.render(
 <Provider store={store}>
-    <ConnectedApp />
+    <App />
 </Provider>, document.getElementById('root'))

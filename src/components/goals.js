@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {handleAddGoal, handleDeleteGoal} from '../actions/goals'
+import {connect} from '../contextApi/ContextApi'
 import List from './List'
 
 class Goals extends Component {
@@ -34,4 +35,6 @@ class Goals extends Component {
     }
   }
 
-  export default Goals
+export default  connect((state) => ({
+    goals: state.goals
+  }))(Goals)

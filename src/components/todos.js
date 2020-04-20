@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {handleAddTodo, handleDeleteTodo, handleToggle} from '../actions/todos'
+import {connect} from '../contextApi/ContextApi'
 import List from './List'
 
 class Todos extends Component {
@@ -38,4 +39,6 @@ class Todos extends Component {
     }
   }
 
-  export default Todos
+ export default connect((state) => ({
+    todos: state.todos
+  }))(Todos)

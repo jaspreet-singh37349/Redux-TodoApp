@@ -1,32 +1,32 @@
 import React, { Component } from 'react'
-import {ConnectedTodos, ConnectedGoals} from '../contextApi/ContextApi'
+import Todos from '../components/todos'
+import Goals from '../components/goals'
 import {handleInitialData} from '../actions/shared'
+import {connect} from '../contextApi/ContextApi'
 
 class App extends Component {
   componentDidMount () {
-    const { store } = this.props
+    const { dispatch } = this.props
 
-    console.log("Using Context Api")
+    console.log("Connecting components using Context Api")
 
-    store.dispatch(handleInitialData())
-
-    store.subscribe(() => this.forceUpdate())
+    dispatch(handleInitialData())
   }
   render() {
-    const { store } = this.props
-    const { loading } = store.getState()
 
-    if (loading === true) {
+    if (this.props.loading === true) {
       return <h3>Loading...</h3>
     }
 
     return (
       <div>
-        <ConnectedTodos />
-        <ConnectedGoals />
+        <Todos />
+        <Goals />
       </div>
     )
   }
 }
 
-export default App
+export default connect((state) => ({
+  loading: state.loading
+}))(App)
